@@ -182,7 +182,7 @@ class Feed
      * @param $url
      * @return array|bool
      */
-    private function getImgFromOg($url)
+    private static function getImgFromOg($url)
     {
         $info = Embed::create($url);
         return $info->image;
@@ -193,7 +193,7 @@ class Feed
      * @param $text
      * @return array|bool
      */
-    private function getImgFromText($text)
+    private static function getImgFromText($text)
     {
         preg_match_all('/<img.*?src=(["\'])(.+?)\1.*?>/i', $text, $res);
         if (empty($res[2][0])) {
