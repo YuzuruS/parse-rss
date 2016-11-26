@@ -1,5 +1,12 @@
 This PHP library can easily parse xml files, especially RSS1.0, RSS2.0 and ATOM.
 =============================
+
+[![Coverage Status](https://coveralls.io/repos/github/YuzuruS/parse-rss/badge.svg?branch=master)](https://coveralls.io/github/YuzuruS/parse-rss?branch=master)
+[![Build Status](https://travis-ci.org/YuzuruS/parse-rss.png?branch=master)](https://travis-ci.org/YuzuruS/parse-rss)
+[![Stable Version](https://poser.pugx.org/yuzuru-s/parse-rss/v/stable)](https://packagist.org/packages/yuzuru-s/parse-rss)
+[![Download Count](https://poser.pugx.org/yuzuru-s/parse-rss/downloads.png)](https://packagist.org/packages/yuzuru-s/parse-rss)
+[![License](https://poser.pugx.org/yuzuru-s/parse-rss/license)](https://packagist.org/packages/yuzuru-s/parse-rss)
+
 This parser can handle RSS easily without being conscious of the difference of RSS1.0 and RSS2.0 and ATOM.
 and gets the minimum necessary value.
 
@@ -12,12 +19,6 @@ and gets the minimum necessary value.
 7. thumbnail of article
 
 This thumbnail is composed by og:img and img tags included description.
-
-[![Coverage Status](https://coveralls.io/repos/github/YuzuruS/parse-rss/badge.svg?branch=master)](https://coveralls.io/github/YuzuruS/parse-rss?branch=master)
-[![Build Status](https://travis-ci.org/YuzuruS/parse-rss.png?branch=master)](https://travis-ci.org/YuzuruS/parse-rss)
-[![Stable Version](https://poser.pugx.org/yuzuru-s/parse-rss/v/stable)](https://packagist.org/packages/yuzuru-s/parse-rss)
-[![Download Count](https://poser.pugx.org/yuzuru-s/parse-rss/downloads.png)](https://packagist.org/packages/yuzuru-s/parse-rss)
-[![License](https://poser.pugx.org/yuzuru-s/parse-rss/license)](https://packagist.org/packages/yuzuru-s/parse-rss)
 
 Requirements
 -----------------------------
