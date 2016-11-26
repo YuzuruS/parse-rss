@@ -42,23 +42,19 @@ Please check [sample code](https://github.com/YuzuruS/parse-rss/blob/master/samp
 require __DIR__ . '/../vendor/autoload.php';
 use YuzuruS\Rss\Feed;
 
-// endpoint → example.com
-$wp = new Post(getenv(WP_USERNAME), getenv(WP_PASSWD), getenv(WP_ENDPOINT));
+$url = 'http://blog.livedoor.jp/dqnplus/index.rdf';
+$ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36';
+$feed = new Feed();
+$res = $feed->load($url, $ua);
 
-$res = $wp->makeCategories([
-	['name' => 'かて1', 'slug' => 'cate1'],
-	['name' => 'かて2', 'slug' => 'cate2'],
-]);
+var_dump($res);
 
-$wp
-	->setTitle('たいとる')
-	->setDescription('本文')
-	->setKeywords(['key1','key2'])
-	->setCategories(['かて1','かて2'])
-	->setDate('2016-11-11')
-	->setWpSlug('entry')
-	->setThumbnail('https://www.pakutaso.com/shared/img/thumb/SAYA160312500I9A3721_TP_V.jpg')
-	->post();
+```
+
+OUTPUT
+----------------------------
+
+```
 
 ```
 
