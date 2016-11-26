@@ -31,12 +31,12 @@ class Feed
         // set channel
         if (isset($rss->channel->title)) {
             $data['channel'] = [
-                'title' => $rss->channel->title,
+                'title' => (string)$rss->channel->title,
                 'link' => (string)$rss->channel->link,
             ];
         } else {
             $data['channel'] = [
-                'title' => $rss->title,
+                'title' => (string)$rss->title,
                 'link' => (string)$rss->link['href'],
             ];
         }

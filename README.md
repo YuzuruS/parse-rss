@@ -1,5 +1,17 @@
 This PHP library can easily parse xml files, especially RSS1.0, RSS2.0 and ATOM.
 =============================
+This parser can handle RSS easily without being conscious of the difference of RSS1.0 and RSS2.0 and ATOM.
+and gets the minimum necessary value.
+
+1. site name
+2. site url
+3. article title
+4. article url
+5. article description
+6. date that article posted
+7. thumbnail of article
+
+This thumbnail is composed by og:img and img tags included description.
 
 [![Coverage Status](https://coveralls.io/repos/github/YuzuruS/parse-rss/badge.svg?branch=master)](https://coveralls.io/github/YuzuruS/parse-rss?branch=master)
 [![Build Status](https://travis-ci.org/YuzuruS/parse-rss.png?branch=master)](https://travis-ci.org/YuzuruS/parse-rss)
@@ -12,6 +24,7 @@ Requirements
 - PHP
   - >=5.5 >=5.6, >=7.0
 - ext-xml
+- ext-curl
 - Composer
 
 
@@ -55,6 +68,44 @@ OUTPUT
 ----------------------------
 
 ```
+array(2) {
+  'channel' =>
+  array(2) {
+    'title' =>
+    string(27) "site name"
+    'link' =>
+    string "site url"
+  }
+  'item' =>
+  array(15) {
+    [0] =>
+    array(5) {
+      'title' =>
+      string "title"
+      'link' =>
+      string"url"
+      'date' =>
+      string "date"
+      'description' =>
+      string "description"
+      'image' =>
+      array(2) {
+        'ogimg' =>
+        string(58) "img url"
+        'img' =>
+        array(3) {
+          [0] =>
+          string(58) "img url1"
+          [1] =>
+          string(58) "img url2"
+          [2] =>
+          string(94) "img url3"
+        }
+      }
+    }
+    [1] =>
+    array(5) {
+...
 
 ```
 
@@ -72,8 +123,10 @@ Currently tested with PHP 7.0.0
 
 History
 ----------------------------
-
-
+- 1.0.1
+  - Bug fix
+- 1.0.0
+  - Published
 
 
 License
