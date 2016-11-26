@@ -17,7 +17,24 @@ class PostTest extends \PHPUnit_Framework_TestCase
 		$url = 'http://blog.livedoor.jp/dqnplus/index.rdf';
 		$ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36';
 		$feed = new Feed();
-		$res = $feed->load($url, $ua);
+		$res = $feed->load($url, $ua, 'user', 'pass');
+		$this->assertTrue(!empty($res));
+	}
+
+	public function testFeedRdfCache()
+	{
+		$url = 'http://blog.livedoor.jp/dqnplus/index.rdf';
+		$ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36';
+		$feed = new Feed();
+		$feed::$cacheDir = '.';
+		$res = $feed->load($url, $ua, 'user', 'pass');
+		$this->assertTrue(!empty($res));
+
+		$url = 'http://blog.livedoor.jp/dqnplus/index.rdf';
+		$ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36';
+		$feed = new Feed();
+		$feed::$cacheDir = '.';
+		$res = $feed->load($url, $ua, 'user', 'pass');
 		$this->assertTrue(!empty($res));
 	}
 

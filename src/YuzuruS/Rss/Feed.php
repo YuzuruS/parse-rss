@@ -246,30 +246,24 @@ class Feed
      */
     private static function httpRequest($url, $ua, $user, $pass)
     {
-        if (extension_loaded('curl')) {
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, $url);
-            if ($user !== NULL || $pass !== NULL) {
-                curl_setopt($curl, CURLOPT_USERPWD, "$user:$pass");
-            }
-            if ($ua !== NULL) {
-                curl_setopt($curl, CURLOPT_USERAGENT, $ua);
-            }
-            curl_setopt($curl, CURLOPT_HEADER, FALSE);
-            curl_setopt($curl, CURLOPT_TIMEOUT, 20);
-            curl_setopt($curl, CURLOPT_ENCODING , '');
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE); // no echo, just return result
-            if (!ini_get('open_basedir')) {
-                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE); // sometime is useful :)
-            }
-            $result = curl_exec($curl);
-            return curl_errno($curl) === 0 && curl_getinfo($curl, CURLINFO_HTTP_CODE) === 200
-                ? $result
-                : FALSE;
-        } elseif ($user === NULL && $pass === NULL) {
-            return file_get_contents($url);
-        } else {
-            throw new \Exception('PHP extension CURL is not loaded.');
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        if ($user !== NULL || $pass !== NULL) {
+            curl_setopt($curl, CURLOPT_USERPWD, "$user:$pass");
         }
+        if ($ua !== NULL) {
+            curl_setopt($curl, CURLOPT_USERAGENT, $ua);
+        }
+        curl_setopt($curl, CURLOPT_HEADER, FALSE);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 20);
+        curl_setopt($curl, CURLOPT_ENCODING , '');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE); // no echo, just return result
+        if (!ini_get('open_basedir')) {
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE); // sometime is useful :)
+        }
+        $result = curl_exec($curl);
+        return curl_errno($curl) === 0 && curl_getinfo($curl, CURLINFO_HTTP_CODE) === 200
+            ? $result
+            : FALSE;
     }
 }
