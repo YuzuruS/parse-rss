@@ -1,13 +1,14 @@
 {
   "name": "yuzuru-s/parse-rss",
   "description": "This PHP library can easily parse xml files, especially RSS1.0, RSS2.0 and ATOM.",
-  "keywords": ["rss", "atom", "parser"],
+  "keywords": ["rss", "atom", "parser", "rdf"],
   "homepage": "https://github.com/YuzuruS/parse-rss",
   "type": "library",
   "license": "MIT",
   "require" : {
     "php": ">=5.5.0",
     "ext-xml": "*",
+    "ext-curl": "*",
     "embed/embed": "*"
   },
   "authors": [
