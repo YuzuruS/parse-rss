@@ -121,7 +121,7 @@ array(2) {
 
 You can also enable caching:
 
-```
+```php
 Feed::$cacheDir = __DIR__ . '/tmp';
 Feed::$cacheExpire = '5 hours';
 ```
