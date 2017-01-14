@@ -23,7 +23,7 @@ class Feed
      * @param null $pass
      * @return array
      */
-    public static function load($url, $ua = NULL, $user = NULL, $pass = NULL)
+    public static function load($url, $ua = NULL, $getImg = false, $user = NULL, $pass = NULL)
     {
         $data = [];
         $rss = self::loadXml($url, $ua, $user, $pass);
@@ -43,13 +43,13 @@ class Feed
 
         switch (strtolower($rss->getName())) {
             case 'rdf': // rss1.0
-                $data['item'] = self::getItemsFromRdf($rss);
+                $data['item'] = self::getItemsFromRdf($rss, $getImg);
                 break;
             case 'rss': // rss2.0
-                $data['item'] = self::getItemsFromRss($rss);
+                $data['item'] = self::getItemsFromRss($rss, $getImg);
                 break;
             case 'feed': // atom
-                $data['item'] = self::getItemsFromAtom($rss);
+                $data['item'] = self::getItemsFromAtom($rss, $getImg);
                 break;
         }
         return $data;
@@ -60,7 +60,7 @@ class Feed
      * @param $rss
      * @return array
      */
-    private static function getItemsFromRdf($rss)
+    private static function getItemsFromRdf($rss, $getImg)
     {
         $data = [];
         foreach ($rss->item as $item) {
@@ -79,9 +79,11 @@ class Feed
             $tmp['description'] = mb_convert_encoding((string)$item->description, 'UTF-8', 'auto');
 
             // image
-            $content = (string)$item->children('http://purl.org/rss/1.0/modules/content/')->encoded;
-            if ($image = self::getImgs($tmp['link'], $content)) {
-                $tmp['image'] = $image;
+            if ($getImg === true) {
+                $content = (string)$item->children('http://purl.org/rss/1.0/modules/content/')->encoded;
+                if ($image = self::getImgs($tmp['link'], $content)) {
+                    $tmp['image'] = $image;
+                }
             }
             $data[] = $tmp;
         }
@@ -93,7 +95,7 @@ class Feed
      * @param $rss
      * @return array
      */
-    private static function getItemsFromRss($rss)
+    private static function getItemsFromRss($rss, $getImg)
     {
         $data = [];
         foreach ($rss->channel->item as $item) {
@@ -111,9 +113,11 @@ class Feed
             // description
             $tmp['description'] = mb_convert_encoding((string)$item->description,'UTF-8','auto');
 
-            // images
-            if ($image = self::getImgs($tmp['link'], $tmp['description'])) {
-                $tmp['image'] = $image;
+            if ($getImg === true) {
+                // images
+                if ($image = self::getImgs($tmp['link'], $tmp['description'])) {
+                    $tmp['image'] = $image;
+                }
             }
             $data[] = $tmp;
         }
@@ -125,7 +129,7 @@ class Feed
      * @param $rss
      * @return array
      */
-    private static function getItemsFromAtom($rss)
+    private static function getItemsFromAtom($rss, $getImg)
     {
         $data = [];
         foreach ($rss->entry as $entry) {
@@ -147,9 +151,11 @@ class Feed
             // description
             $tmp['description'] = mb_convert_encoding((string)$entry->content, 'UTF-8','auto');
 
-            // images
-            if ($image = self::getImgs($tmp['link'], $tmp['description'])) {
-                $tmp['image'] = $image;
+            if ($getImg === true) {
+                // images
+                if ($image = self::getImgs($tmp['link'], $tmp['description'])) {
+                    $tmp['image'] = $image;
+                }
             }
             $data[] = $tmp;
         }
