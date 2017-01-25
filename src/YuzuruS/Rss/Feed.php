@@ -65,7 +65,7 @@ class Feed
         $data = [];
         foreach ($rss->item as $item) {
             // title
-            $tmp['title'] = mb_convert_encoding((string)$item->title,'UTF-8','auto');
+            $tmp['title'] = mb_convert_encoding((string)$item->title,'UTF-8','SJIS,EUC-JP,auto');
 
             // link
             $tmp['link'] = (string)($item->link);
@@ -76,7 +76,7 @@ class Feed
             $tmp['date'] = $dt->format('Y-m-d H:i:s');
 
             // description
-            $tmp['description'] = mb_convert_encoding((string)$item->description, 'UTF-8', 'auto');
+            $tmp['description'] = mb_convert_encoding((string)$item->description, 'UTF-8', 'SJIS,EUC-JP,auto');
 
             // image
             if ($getImg === true) {
@@ -100,7 +100,7 @@ class Feed
         $data = [];
         foreach ($rss->channel->item as $item) {
             // title
-            $tmp['title'] = mb_convert_encoding((string)$item->title,'UTF-8','auto');
+            $tmp['title'] = mb_convert_encoding((string)$item->title,'UTF-8','SJIS,EUC-JP,auto');
 
             // link
             $tmp['link'] = (string)$item->link;
@@ -111,7 +111,7 @@ class Feed
             $tmp['date'] = $dt->format('Y-m-d H:i:s');
 
             // description
-            $tmp['description'] = mb_convert_encoding((string)$item->description,'UTF-8','auto');
+            $tmp['description'] = mb_convert_encoding((string)$item->description,'UTF-8','SJIS,EUC-JP,auto');
 
             if ($getImg === true) {
                 // images
@@ -134,7 +134,7 @@ class Feed
         $data = [];
         foreach ($rss->entry as $entry) {
             // title
-            $tmp['title'] = mb_convert_encoding((string)$entry->title, 'UTF-8','auto');
+            $tmp['title'] = mb_convert_encoding((string)$entry->title, 'UTF-8','SJIS,EUC-JP,auto');
 
             // link
             $tmp['link'] = (string)$entry->link['href'];
@@ -149,7 +149,7 @@ class Feed
             $tmp['date'] = $dt->format('Y-m-d H:i:s');
 
             // description
-            $tmp['description'] = mb_convert_encoding((string)$entry->content, 'UTF-8','auto');
+            $tmp['description'] = mb_convert_encoding((string)$entry->content, 'UTF-8','SJIS,EUC-JP,auto');
 
             if ($getImg === true) {
                 // images
