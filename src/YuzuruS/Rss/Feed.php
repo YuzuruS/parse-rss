@@ -15,6 +15,8 @@ class Feed
     /** @var string */
     public static $cacheDir;
 
+    public static $timezone = 'Asia/Tokyo';
+
     /**
      * Loads RSS or Atom feed
      * @param $url
@@ -78,6 +80,7 @@ class Feed
             // date
             $date = (string)$item->children('http://purl.org/dc/elements/1.1/')->date;
             $dt = new \DateTime($date);
+            $dt->setTimeZone(new \DateTimeZone(self::$timezone));
             $tmp['date'] = $dt->format('Y-m-d H:i:s');
 
             // description
@@ -113,6 +116,7 @@ class Feed
             // date
             $date = (string)$item->pubDate;
             $dt = new \DateTime($date);
+            $dt->setTimeZone(new \DateTimeZone(self::$timezone));
             $tmp['date'] = $dt->format('Y-m-d H:i:s');
 
             // description
@@ -151,6 +155,7 @@ class Feed
                 $date = (string)$entry->published;
             }
             $dt = new \DateTime($date);
+            $dt->setTimeZone(new \DateTimeZone(self::$timezone));
             $tmp['date'] = $dt->format('Y-m-d H:i:s');
 
             // description
