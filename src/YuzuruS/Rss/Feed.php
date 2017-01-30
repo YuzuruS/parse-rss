@@ -26,7 +26,12 @@ class Feed
     public static function load($url, $ua = NULL, $getImg = false, $user = NULL, $pass = NULL)
     {
         $data = [];
-        $rss = self::loadXml($url, $ua, $user, $pass);
+        try {
+            $rss = self::loadXml($url, $ua, $user, $pass);
+        } catch (\Exception $e) {
+            error_log($e->getMessage() . "\n");
+            return [];
+        }
 
         // set channel
         if (isset($rss->channel->title)) {
@@ -236,6 +241,7 @@ class Feed
         } elseif (self::$cacheDir && $data = @file_get_contents($cacheFile)) {
             // ok
         } else {
+            // Cannot load feed.
             throw new \Exception('Cannot load feed.');
         }
         return new \SimpleXMLElement($data, LIBXML_NOWARNING | LIBXML_NOERROR);
